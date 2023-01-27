@@ -20,8 +20,7 @@ def read_words(num):
 
 def run():
     words_create()
-    #choose = random.randint(1,6)
-    choose = 7
+    choose = random.randint(1,6)
     palabra = read_words(choose)
     list_guess = [ ]
     
