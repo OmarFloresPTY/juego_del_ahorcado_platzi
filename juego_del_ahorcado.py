@@ -22,10 +22,8 @@ def run():
     words_create()
     choose = random.randint(1,6)
     palabra = read_words(choose)
-    list_guess = [ ]
-    
-    for i in range(1, len(palabra)):
-        list_guess.append(" _ ")
+
+    list_guess = [" _ " for i in range(1, len(palabra))]
 
     x = len(list_guess)
     ban = True
