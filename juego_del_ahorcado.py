@@ -18,6 +18,16 @@ def read_words(num):
                 break
     return guess
 
+def search(w,list_guess):
+    for mapeo in list_guess:
+        if w == mapeo:
+            print("Ya introdujo la letra ",w," Intente con otra letra.")
+            clear = False
+            break
+        else:
+            clear = True
+    return clear
+
 def run():
     words_create()
     choose = random.randint(1,6)
@@ -26,7 +36,6 @@ def run():
     list_guess = [" _ " for i in range(1, len(palabra))]
     ban = True
     y = 0
-    clear = True
     print(''.join(list_guess))  
 
     while ban == True:  
@@ -35,14 +44,8 @@ def run():
         i = 0
         os.system("clear") 
 
-        for mapeo in list_guess:
-            if w == mapeo:
-                print("Ya introdujo la letra ",w," Intente con otra letra.")
-                clear = False
-                break
-            else:
-                clear = True
-                
+        clear = search(w,list_guess)
+
         if clear == True:
             for letra in palabra:
                 if w == letra:
