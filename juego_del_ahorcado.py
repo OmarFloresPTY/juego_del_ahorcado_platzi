@@ -24,8 +24,6 @@ def run():
     palabra = read_words(choose)
 
     list_guess = [" _ " for i in range(1, len(palabra))]
-
-    x = len(list_guess)
     ban = True
     y = 0
     clear = True
@@ -44,12 +42,13 @@ def run():
                 break
             else:
                 clear = True
+                
         if clear == True:
             for letra in palabra:
                 if w == letra:
                     list_guess[i] = w
                     y = y + 1
-                if y == x:
+                if y == len(list_guess):
                     ban = False
                 i = i + 1
         print(''.join(list_guess))
