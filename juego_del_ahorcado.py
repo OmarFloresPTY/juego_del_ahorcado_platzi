@@ -21,8 +21,6 @@ def read_words(num):
     except OSError:
         print("No se puede abrir el archivo, compruebe la ubicación.")
 
-
-
 def run():
     words_create()
     choose = random.randint(1,6)
@@ -31,30 +29,36 @@ def run():
     list_guess = [" _ " for i in range(1, len(palabra))]
     ban = True
     y = 0
+    os.system("clear") 
     print(''.join(list_guess))  
 
-    while ban == True:  
+    while ban == True:
+        error_input = False  
         w = input("Introduce una letra: ")
-        assert w.isnumeric() and len(w)> 1, "No se permite introducir cadenas vacías ni números. Intente otra vez."
         w = w.upper()
+        
+        error_input_lambda = lambda string: string.isnumeric() or len(string) == 0 or len(w) > 1
+        error_input = error_input_lambda(w)
 
-        i = 0
-        os.system("clear") 
-
-        clear = lambda string: string in list_guess
-        clear = not(clear(w))
-
-        if clear == True:
-            for letra in palabra:
-                if w == letra:
-                    list_guess[i] = w
-                    y = y + 1
-                if y == len(list_guess):
-                    ban = False
-                i = i + 1
+        if error_input == True:
+            print("El juego no acepta cadenas vacias, ni frases, ni numeros. Vuelva a intentarlo.")
         else:
-            print(f"La letra {w} ya fue utilizada, intente otra letra")
-        print(''.join(list_guess))
+            i = 0
+            os.system("clear") 
+            clear = lambda string: string in list_guess
+            clear = not(clear(w))
+
+            if clear == True:
+                for letra in palabra:
+                    if w == letra:
+                        list_guess[i] = w
+                        y = y + 1
+                    if y == len(list_guess):
+                        ban = False
+                    i = i + 1
+            else:
+                print(f"La letra {w} ya fue utilizada, intente otra letra")
+            print(''.join(list_guess))
 
     print("Ganaste, La Palabra es:",''.join(list_guess),"!!!!!")    
 
