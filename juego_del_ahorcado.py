@@ -10,23 +10,18 @@ def words_create():
 
 def read_words(num):
     i = 0
-    with open("./words/words.txt", "r",encoding="utf-8") as f:
-        for word in f:
-            guess = word
-            i = i + 1
-            if i == num:
-                break
-    return guess
+    try:
+        with open("./words/words.txt", "r",encoding="utf-8") as f:
+            for word in f:
+                guess = word
+                i = i + 1
+                if i == num:
+                    break
+        return guess
+    except OSError:
+        print("No se puede abrir el archivo, compruebe la ubicación.")
 
-def search(w,list_guess):
-    for mapeo in list_guess:
-        if w == mapeo:
-            print("Ya introdujo la letra ",w," Intente con otra letra.")
-            clear = False
-            break
-        else:
-            clear = True
-    return clear
+
 
 def run():
     words_create()
@@ -40,11 +35,14 @@ def run():
 
     while ban == True:  
         w = input("Introduce una letra: ")
+        assert w.isnumeric() and len(w)> 1, "No se permite introducir cadenas vacías ni números. Intente otra vez."
         w = w.upper()
+
         i = 0
         os.system("clear") 
 
-        clear = search(w,list_guess)
+        clear = lambda string: string in list_guess
+        clear = not(clear(w))
 
         if clear == True:
             for letra in palabra:
@@ -54,8 +52,10 @@ def run():
                 if y == len(list_guess):
                     ban = False
                 i = i + 1
+        else:
+            print(f"La letra {w} ya fue utilizada, intente otra letra")
         print(''.join(list_guess))
-  
+
     print("Ganaste, La Palabra es:",''.join(list_guess),"!!!!!")    
 
 if __name__ == '__main__':
