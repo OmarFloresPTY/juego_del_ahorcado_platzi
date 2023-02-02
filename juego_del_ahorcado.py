@@ -98,12 +98,12 @@ def run():
             clear = not(clear(w))
 
             if clear == True:
-                for letra in palabra: #PANAMA
+                for letra in palabra:
                     if w == letra:
                         list_guess[i] = w
                         y = y + 1
                     i = i + 1 
-                if y == len(list_guess): #Puede funcionar incluso fuera del for. #Se acaba cuando se completa.
+                if y == len(list_guess):
                     print("GANASTE EL JUEGO DEL AHORCADO, LA PALABRA FUE: ") 
                     ban = False
                        
